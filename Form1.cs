@@ -12,18 +12,19 @@ namespace PicoDucky
 {
     public partial class Form1 : Form
     {
+        GlobalHook globalHook;
+
         public Form1()
         {
             InitializeComponent();
-            SubscribeGlobal();
+            globalHook = new GlobalHook(this);
+            globalHook.SubscribeGlobal();
             FormClosing += Main_Closing;
         }
 
         private void Main_Closing(object sender, CancelEventArgs e)
         {
-            Unsubscribe();
+            globalHook.Unsubscribe();
         }
-
-        
     }
 }
